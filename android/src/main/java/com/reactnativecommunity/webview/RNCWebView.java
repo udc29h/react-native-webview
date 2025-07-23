@@ -135,6 +135,16 @@ public class RNCWebView extends WebView implements LifecycleEventListener {
     }
 
     @Override
+    protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {
+        super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
+    
+        if (clampedY && scrollY == 0) {
+            Log.d("WebView", "Overscrolled at top!");
+            requestDisallowInterceptTouchEvent(true);
+        }
+    }
+
+    @Override
     protected void onSizeChanged(int w, int h, int ow, int oh) {
         super.onSizeChanged(w, h, ow, oh);
 
